@@ -4,7 +4,7 @@ category: info
 ipr: "trust200902"
 keyword: ["security", "oauth2", "revocation", "status"]
 
-docname: draft-bormann-identifier-list
+docname: draft-bormann-identifier-list-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
