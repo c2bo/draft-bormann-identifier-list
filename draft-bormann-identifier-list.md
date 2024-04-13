@@ -10,8 +10,8 @@ number:
 date:
 v: 3
 venue:
-  github: c2bo/draft-bormann-identifier-list
-  latest: https://c2bo.github.com/draft-bormann-identifier-list
+  github: "c2bo/draft-bormann-identifier-list"
+  latest: "https://c2bo.github.io/draft-bormann-identifier-list/draft-bormann-identifier-list.html"
   wg: "Web Authorization Protocol"
 
 author:
