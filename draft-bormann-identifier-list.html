@@ -1145,21 +1145,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-idenitfier-list" class="internal xref">Idenitfier List</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-identifier-list" class="internal xref">Identifier List</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-identifier-list-in-json-for" class="internal xref">Identifier List in JSON Format</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-idenitifier-list-in-cbor-fo" class="internal xref">Idenitifier List in CBOR Format</a></p>
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-identifier-list-in-cbor-for" class="internal xref">Identifier List in CBOR Format</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-idenitifier-list-token" class="internal xref">Idenitifier List Token</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-identifier-list-token" class="internal xref">Identifier List Token</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-idenitifier-list-token-in-j" class="internal xref">Idenitifier List Token in JWT Format</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-identifier-list-token-in-jw" class="internal xref">Identifier List Token in JWT Format</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-identifier-list-token-in-cw" class="internal xref">Identifier List Token in CWT Format</a></p>
@@ -1302,7 +1302,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-1-1">Token formats secured by JOSE <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span> or COSE <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, such as JSON Web Tokens (JWTs) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, CBOR Web Tokens (CWTs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> and ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document defines a new status mechanism using the framework that is given by the Status List <span>[<a href="#StatusList" class="cite xref">StatusList</a>]</span>, thus registering a new mechanism in it's registry.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This document defines an Identifier List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of the listed Referenced Tokens are conveyed via an array in the Idenitfier List. Each Referenced Token is allocated an unique identifier during issuance. The status of each Referenced Token is then linked to its unique identifier. Not all Referenced Tokens provided by the Issuer may be present in the Identifier List, the absense of a Referenced Token may therefore be interpreted by a default value. An Identifier List may either be provided by an endpoint or be signed and embedded into an Identifier List Token, whereas this document defines its representations in JWT and CWT.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3">This document defines an Identifier List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of the listed Referenced Tokens are conveyed via an array in the Identifier List. Each Referenced Token is allocated an unique identifier during issuance. The status of each Referenced Token is then linked to its unique identifier. Not all Referenced Tokens provided by the Issuer may be present in the Identifier List, the absence of a Referenced Token may therefore be interpreted by a default value. An Identifier List may either be provided by an endpoint or be signed and embedded into an Identifier List Token, whereas this document defines its representations in JWT and CWT.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-1-4">
 <pre>
 +-------------------+                  +------------------------+
@@ -1384,16 +1384,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-terminology">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
       </h2>
-<p id="section-3-1">The specification uses the terms "Isusuer", "Relying Party", "Referenced Token" defined by <span>[<a href="#StatusList" class="cite xref">StatusList</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The specification uses the terms "Issuer", "Relying Party", "Referenced Token" defined by <span>[<a href="#StatusList" class="cite xref">StatusList</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3-2">
-        <dt id="section-3-2.1">Idenitifier List:</dt>
+        <dt id="section-3-2.1">Identifier List:</dt>
         <dd style="margin-left: 1.5em" id="section-3-2.2">
           <p id="section-3-2.2.1">An object in JSON or CBOR representation containing an array that lists the statuses of multiple Referenced Tokens.<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-2.3">Idenitifier List Token:</dt>
+<dt id="section-3-2.3">Identifier List Token:</dt>
         <dd style="margin-left: 1.5em" id="section-3-2.4">
-          <p id="section-3-2.4.1">A token in JWT or CWT representation that contains a cryptographically secured Idenitifier List.<a href="#section-3-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-3-2.4.1">A token in JWT or CWT representation that contains a cryptographically secured Identifier List.<a href="#section-3-2.4.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1406,15 +1406,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 <div id="identifier-list">
 <section id="section-4">
-      <h2 id="name-idenitfier-list">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-idenitfier-list" class="section-name selfRef">Idenitfier List</a>
+      <h2 id="name-identifier-list">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-identifier-list" class="section-name selfRef">Identifier List</a>
       </h2>
 <div id="identifier-list-json">
 <section id="section-4.1">
         <h3 id="name-identifier-list-in-json-for">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-identifier-list-in-json-for" class="section-name selfRef">Identifier List in JSON Format</a>
         </h3>
-<p id="section-4.1-1">This section defines the structure for a JSON-encoded Idenitifier List:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">This section defines the structure for a JSON-encoded Identifier List:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">
             <p id="section-4.1-2.1.1"><code>status</code>: <span class="bcp14">REQUIRED</span>, as defined in section xyz of <span>[<a href="#StatusList" class="cite xref">StatusList</a>]</span><a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
@@ -1434,7 +1434,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </li>
         </ul>
 <p id="section-4.1-3">The identifier list objects may contains other claims.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">The following example illustrates the JSON representation of the Idenitifier List:
+<p id="section-4.1-4">The following example illustrates the JSON representation of the Identifier List:
 Option 1a:
 <code>json
 "status" : {
@@ -1458,11 +1458,11 @@ Option 1a:
 </div>
 <div id="identifier-list-cbor">
 <section id="section-4.2">
-        <h3 id="name-idenitifier-list-in-cbor-fo">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-idenitifier-list-in-cbor-fo" class="section-name selfRef">Idenitifier List in CBOR Format</a>
+        <h3 id="name-identifier-list-in-cbor-for">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-identifier-list-in-cbor-for" class="section-name selfRef">Identifier List in CBOR Format</a>
         </h3>
 <p id="section-4.2-1">This section defines the structure for a CBOR-encoded Identifier List:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">The following example illustrates the CBOR representation of the Idenitifier List:<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">The following example illustrates the CBOR representation of the Identifier List:<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">The following is the CBOR diagnostic output of the example above:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1470,15 +1470,15 @@ Option 1a:
 </div>
 <div id="identifier-list-token">
 <section id="section-5">
-      <h2 id="name-idenitifier-list-token">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-idenitifier-list-token" class="section-name selfRef">Idenitifier List Token</a>
+      <h2 id="name-identifier-list-token">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-identifier-list-token" class="section-name selfRef">Identifier List Token</a>
       </h2>
-<p id="section-5-1">A Idenitifier List Token embeds the Idenitifier List into a token that is cryptographically signed and protects the integrity of the Idenitifier List. This allows for the Idenitifier List Token to be hosted by third parties or be transferred for offline use cases.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">This section specifies Idenitifier List Tokens in JSON Web Token (JWT) and CBOR Web Token (CWT) format.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-1">A Identifier List Token embeds the Identifier List into a token that is cryptographically signed and protects the integrity of the Identifier List. This allows for the Identifier List Token to be hosted by third parties or be transferred for offline use cases.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">This section specifies Identifier List Tokens in JSON Web Token (JWT) and CBOR Web Token (CWT) format.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <div id="identifier-list-token-jwt">
 <section id="section-5.1">
-        <h3 id="name-idenitifier-list-token-in-j">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-idenitifier-list-token-in-j" class="section-name selfRef">Idenitifier List Token in JWT Format</a>
+        <h3 id="name-identifier-list-token-in-jw">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-identifier-list-token-in-jw" class="section-name selfRef">Identifier List Token in JWT Format</a>
         </h3>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-5.1-1.1">
