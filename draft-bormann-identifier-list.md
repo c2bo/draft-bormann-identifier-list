@@ -155,25 +155,28 @@ The identifier list objects may contains other claims.
 
 The following example illustrates the JSON representation of the Identifier List:
 Option 1a:
-```json
+
+~~~ json
+
 "status" : {
     "identifier_list": [
         { "id" : 256984364732378, "status" : 1},
         { "id" : 719348638462628, "status" : 1}
     ]
 }
-```
+~~~
+
 > We currently prefer Option 1b:
 
 Option 1b:
-```json
+~~~ json
 "status" : {
     "identifier_list": {
         "256984364732378": { "status" : 1},
         "719348638462628": { "status" : 1}
     }
 }
-```
+~~~
 
 
 ## Identifier List in CBOR Format {#identifier-list-cbor}
