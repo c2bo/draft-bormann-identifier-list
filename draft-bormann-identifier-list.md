@@ -23,7 +23,6 @@ author:
     email: paul.bastian@posteo.de
 
 normative:
-ormative:
   RFC1950: RFC1950
   RFC1951: RFC1951
   RFC2046: RFC2046
@@ -58,13 +57,19 @@ ormative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
+  IANA.COSE:
+    author:
+      org: "IANA"
+    title: "CBOR Object Signing and Encryption (COSE)"
+    target: "https://www.iana.org/assignments/cose/cose.xhtml"
   CWT.typ: I-D.ietf-cose-typ-header-parameter
 informative:
+  RFC5280: RFC5280
   RFC6749: RFC6749
   RFC7662: RFC7662
   RFC7800: RFC7800
   SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
-  StatusList: I-D.ietf-oauth-status-list
+  StatusList: I-D.ietf-oauth-identifier-list
   ISO.mdoc:
     author:
       org: "ISO/IEC JTC 1/SC 17"
@@ -83,7 +88,7 @@ Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JSON We
 
 This document defines a new status mechanism using the framework that is given by the Status List {{StatusList}}, thus registering a new mechanism in it's registry.
 
-This document defines an Identifier List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of the listed Referenced Tokens are conveyed via an array in the Idenitfier List. Each Referenced Token is allocated an unique identifier during issuance. The status of each Referenced Token is then linked to its unique identifier. Not all Referenced Tokens provided by the Issuer may be present in the Identifier List, the absense of a Referenced Token may therefore be interpreted by a default value. An Identifier List may either be provided by an endpoint or be signed and embedded into an Identifier List Token, whereas this document defines its representations in JWT and CWT. 
+This document defines an Identifier List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of the listed Referenced Tokens are conveyed via an array in the Idenitfier List. Each Referenced Token is allocated an unique identifier during issuance. The status of each Referenced Token is then linked to its unique identifier. Not all Referenced Tokens provided by the Issuer may be present in the Identifier List, the absense of a Referenced Token may therefore be interpreted by a default value. An Identifier List may either be provided by an endpoint or be signed and embedded into an Identifier List Token, whereas this document defines its representations in JWT and CWT.
 
 
 ~~~ ascii-art
@@ -119,7 +124,7 @@ The decisions taken in this specification aim to achieve the following design go
 
 * the specification shall favor a simple and easy to understand concept
 * the specification shall be easy, fast and secure to implement in all major programming languages
-* the specification shall be optimized to support the most common use cases and avoid unnecessary complexity of corner cases 
+* the specification shall be optimized to support the most common use cases and avoid unnecessary complexity of corner cases
 * the Identifier List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
 * the specification shall not specify key resolution or trust frameworks
@@ -142,7 +147,7 @@ Idenitifier List Token:
 
 # Idenitfier List {#identifier-list}
 
-## Identifier List in JSON Format {#idenitifier-list-json}
+## Identifier List in JSON Format {#identifier-list-json}
 
 This section defines the structure for a JSON-encoded Idenitifier List:
 
@@ -176,7 +181,7 @@ Option 1b:
 ```
 
 
-## Idenitifier List in CBOR Format {#idenitifier-list-cbor}
+## Idenitifier List in CBOR Format {#identifier-list-cbor}
 
 This section defines the structure for a CBOR-encoded Identifier List:
 
@@ -184,13 +189,13 @@ The following example illustrates the CBOR representation of the Idenitifier Lis
 
 The following is the CBOR diagnostic output of the example above:
 
-# Idenitifier List Token {#idenitifier-list-token}
+# Idenitifier List Token {#identifier-list-token}
 
 A Idenitifier List Token embeds the Idenitifier List into a token that is cryptographically signed and protects the integrity of the Idenitifier List. This allows for the Idenitifier List Token to be hosted by third parties or be transferred for offline use cases.
 
 This section specifies Idenitifier List Tokens in JSON Web Token (JWT) and CBOR Web Token (CWT) format.
 
-## Idenitifier List Token in JWT Format {#idenitifier-list-token-jwt}
+## Idenitifier List Token in JWT Format {#identifier-list-token-jwt}
 
 > Paul: I've worked until here
 
@@ -207,7 +212,7 @@ The following content applies to the JWT Claims Set:
 * `iat`: REQUIRED, as defined in section xyz of {{StatusList}}
 * `exp`: OPTIONAL, as defined in section xyz of {{StatusList}}
 * `ttl`: OPTIONAL, as defined in section xyz of {{StatusList}}
-* `identifier_list`: REQUIRED. The `identifier_list` (identifier list) claim MUST specify the Identifier List conforming to the rules outlined in [](#status-list-json).
+* `identifier_list`: REQUIRED. The `identifier_list` (identifier list) claim MUST specify the Identifier List conforming to the rules outlined in [](#identifier-list-json).
 
 The following additional rules apply:
 
@@ -221,11 +226,11 @@ The following additional rules apply:
 
 The following is a non-normative example for a Identifier List Token in JWT format:
 
-~~~~~~~~~~
-{::include ./examples/identifier_list_jwt}
-~~~~~~~~~~
+// ~~~~~~~~~~
+// {::include ./examples/identifier_list_jwt}
+// ~~~~~~~~~~
 
-## Identifier List Token in CWT Format {#status-list-token-cwt}
+## Identifier List Token in CWT Format {#identifier-list-token-cwt}
 
 The Identifier List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
 
@@ -235,11 +240,11 @@ The following content applies to the CWT protected header:
 
 The following content applies to the CWT Claims Set:
 
-* `1` (issuer): REQUIRED. Same definition as `iss` claim in [](#status-list-token-jwt).
-* `2` (subject): REQUIRED. Same definition as `sub` claim in [](#status-list-token-jwt).
-* `6` (issued at): REQUIRED. Same definition as `iat` claim in [](#status-list-token-jwt).
-* `4` (expiration time): OPTIONAL. Same definition as `exp` claim in [](#status-list-token-jwt).
-* `65530` (identifier list): REQUIRED. The identifier list claim MUST specify the Identifier List conforming to the rules outlined in [](#status-list-cbor).
+* `1` (issuer): REQUIRED. Same definition as `iss` claim in [](#identifier-list-token-jwt).
+* `2` (subject): REQUIRED. Same definition as `sub` claim in [](#identifier-list-token-jwt).
+* `6` (issued at): REQUIRED. Same definition as `iat` claim in [](#identifier-list-token-jwt).
+* `4` (expiration time): OPTIONAL. Same definition as `exp` claim in [](#identifier-list-token-jwt).
+* `65530` (identifier list): REQUIRED. The identifier list claim MUST specify the Identifier List conforming to the rules outlined in [](#identifier-list-cbor).
 
 The following additional rules apply:
 
@@ -253,15 +258,15 @@ The following additional rules apply:
 
 The following is a non-normative example for a Identifier List Token in CWT format (not including the type header yet):
 
-~~~~~~~~~~
-{::include ./examples/identifier_list_cwt}
-~~~~~~~~~~
+// ~~~~~~~~~~
+// {::include ./examples/identifier_list_cwt}
+// ~~~~~~~~~~
 
 The following is the CBOR diagnostic output of the example above:
 
-~~~~~~~~~~
-{::include ./examples/identifier_list_cwt_diag}
-~~~~~~~~~~
+// ~~~~~~~~~~
+// {::include ./examples/identifier_list_cwt_diag}
+// ~~~~~~~~~~
 
 # Referenced Token {#referenced-token}
 
@@ -385,10 +390,10 @@ In the successful response, the Status List Provider MUST use the following cont
 - "application/statuslist+cbor" for Status List in CBOR format
 - "application/statuslist+cwt" for Status List in CWT format
 
-In the case of "application/statuslist+json", the response MUST be of type JSON and follow the rules of [](#status-list-json).
-In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#status-list-token-jwt).
-In the case of "application/statuslist+cbor", the response MUST be of type CBOR and follow the rules of [](#status-list-cbor).
-In the case of "application/statuslist+cwt", the response MUST be of type CWT and follow the rules of [](#status-list-token-cwt).
+In the case of "application/statuslist+json", the response MUST be of type JSON and follow the rules of [](#identifier-list-json).
+In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#identifier-list-token-jwt).
+In the case of "application/statuslist+cbor", the response MUST be of type CBOR and follow the rules of [](#identifier-list-cbor).
+In the case of "application/statuslist+cwt", the response MUST be of type CWT and follow the rules of [](#identifier-list-token-cwt).
 
 The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
@@ -476,7 +481,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 *  Claim Name: `identifier_list`
 *  Claim Description: An identifier list containing up-to-date status information on multiple other CWTs encoded as an array.
 *  Change Controller: IETF
-*  Specification Document(s):  [](#status-list-token-cwt) of this specification
+*  Specification Document(s):  [](#identifier-list-token-cwt) of this specification
 
 ## CWT Status Mechanism Methods Registry {#cwt-iana-registry}
 
