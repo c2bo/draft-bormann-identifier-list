@@ -696,178 +696,7 @@ Table of Contents
    [RFC2046] in the "Media Types" registry [IANA.MediaTypes] in the
    manner described in [RFC6838].
 
-   To indicate that the content is an JSON-based Status List:
-
-   *  Type name: application
-
-   *  Subtype name: statuslist+json
-
-   *  Required parameters: n/a
-
-   *  Optional parameters: n/a
-
-   *  Encoding considerations: binary; A JSON-based Status List is a
-      JSON Object.
-
-   *  Security considerations: See (#Security) of [ this specification ]
-
-   *  Interoperability considerations: n/a
-
-   *  Published specification: [ this specification ]
-
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
-
-   *  Fragment identifier considerations: n/a
-
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
-
-   *  Person & email address to contact for further information: Paul
-      Bastian, paul.bastian@posteo.de
-
-   *  Intended usage: COMMON
-
-   *  Restrictions on usage: none
-
-   *  Author: Paul Bastian, paul.bastian@posteo.de
-
-   *  Change controller: IETF
-
-   *  Provisional registration?  No
-
-   To indicate that the content is an JWT-based Status List:
-
-   *  Type name: application
-
-   *  Subtype name: statuslist+jwt
-
-   *  Required parameters: n/a
-
-   *  Optional parameters: n/a
-
-   *  Encoding considerations: binary; A JWT-based Status List is a JWT;
-      JWT values are encoded as a series of base64url-encoded values
-      (some of which may be the empty string) separated by period ('.')
-      characters.
-
-   *  Security considerations: See (#Security) of [ this specification ]
-
-   *  Interoperability considerations: n/a
-
-   *  Published specification: [ this specification ]
-
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
-
-   *  Fragment identifier considerations: n/a
-
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
-
-   *  Person & email address to contact for further information: Paul
-      Bastian, paul.bastian@posteo.de
-
-   *  Intended usage: COMMON
-
-   *  Restrictions on usage: none
-
-   *  Author: Paul Bastian, paul.bastian@posteo.de
-
-   *  Change controller: IETF
-
-   *  Provisional registration?  No
-
-   To indicate that the content is an CBOR-based Status List:
-
-   *  Type name: application
-
-   *  Subtype name: statuslist+cbor
-
-   *  Required parameters: n/a
-
-   *  Optional parameters: n/a
-
-   *  Encoding considerations: binary; A CBOR-based Status List is a
-      CBOR Object.
-
-   *  Security considerations: See (#Security) of [ this specification ]
-
-   *  Interoperability considerations: n/a
-
-   *  Published specification: [ this specification ]
-
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
-
-   *  Fragment identifier considerations: n/a
-
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
-
-   *  Person & email address to contact for further information: Paul
-      Bastian, paul.bastian@posteo.de
-
-   *  Intended usage: COMMON
-
-   *  Restrictions on usage: none
-
-   *  Author: Paul Bastian, paul.bastian@posteo.de
-
-   *  Change controller: IETF
-
-   *  Provisional registration?  No
-
-   To indicate that the content is an CWT-based Status List:
-
-   *  Type name: application
-
-   *  Subtype name: statuslist+cwt
-
-   *  Required parameters: n/a
-
-   *  Optional parameters: n/a
-
-   *  Encoding considerations: binary;
-
-   *  Security considerations: See (#Security) of [ this specification ]
-
-   *  Interoperability considerations: n/a
-
-   *  Published specification: [ this specification ]
-
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
-
-   *  Fragment identifier considerations: n/a
-
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
-
-   *  Person & email address to contact for further information: Paul
-      Bastian, paul.bastian@posteo.de
-
-   *  Intended usage: COMMON
-
-   *  Restrictions on usage: none
-
-   *  Author: Paul Bastian, paul.bastian@posteo.de
-
-   *  Change controller: IETF
-
-   *  Provisional registration?  No
+   TODO
 
 12.  References
 
@@ -898,15 +727,6 @@ Table of Contents
               <https://www.iana.org/assignments/media-types/media-
               types.xhtml>.
 
-   [RFC1950]  Deutsch, P. and J. Gailly, "ZLIB Compressed Data Format
-              Specification version 3.3", RFC 1950,
-              DOI 10.17487/RFC1950, May 1996,
-              <https://www.rfc-editor.org/rfc/rfc1950>.
-
-   [RFC1951]  Deutsch, P., "DEFLATE Compressed Data Format Specification
-              version 1.3", RFC 1951, DOI 10.17487/RFC1951, May 1996,
-              <https://www.rfc-editor.org/rfc/rfc1951>.
-
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
               DOI 10.17487/RFC2046, November 1996,
@@ -934,10 +754,6 @@ Table of Contents
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
               <https://www.rfc-editor.org/rfc/rfc6838>.
 
-   [RFC7515]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web
-              Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
-              2015, <https://www.rfc-editor.org/rfc/rfc7515>.
-
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7519>.
@@ -946,19 +762,9 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", STD 90, RFC 8259,
-              DOI 10.17487/RFC8259, December 2017,
-              <https://www.rfc-editor.org/rfc/rfc8259>.
-
    [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
-
-   [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
-              Representation (CBOR)", STD 94, RFC 8949,
-              DOI 10.17487/RFC8949, December 2020,
-              <https://www.rfc-editor.org/rfc/rfc8949>.
 
    [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
