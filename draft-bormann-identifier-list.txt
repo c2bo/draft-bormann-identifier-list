@@ -226,7 +226,9 @@ Table of Contents
    The identifier list objects may contains other claims.
 
    The following example illustrates the JSON representation of the
-   Identifier List: Option 1a:
+   Identifier List:
+
+   Option 1a:
 
    "status" : {
        "identifier_list": [
@@ -235,11 +237,17 @@ Table of Contents
        ]
    }
 
-      We currently prefer Option 1b:
+   Option 1b:
 
-   Option 1b: ~~~ json "status" : { "identifier_list": {
-   "256984364732378": { "status" : 1}, "719348638462628": { "status" :
-   1} } } ~~~
+   "status" : {
+       "identifier_list": {
+           "256984364732378": { "status" : 1},
+           "719348638462628": { "status" : 1}
+       }
+   }
+
+      Option 1a allows for repeating IDs, Option 1b does not.  Option 1b
+      would be easier to work with for verifiers.
 
 4.2.  Identifier List in CBOR Format
 
