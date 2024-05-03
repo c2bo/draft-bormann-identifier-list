@@ -154,10 +154,10 @@ This section defines the structure for a JSON-encoded Identifier List:
 The identifier list objects may contains other claims.
 
 The following example illustrates the JSON representation of the Identifier List:
+
 Option 1a:
 
 ~~~ json
-
 "status" : {
     "identifier_list": [
         { "id" : 256984364732378, "status" : 1},
@@ -166,9 +166,9 @@ Option 1a:
 }
 ~~~
 
-> We currently prefer Option 1b:
 
 Option 1b:
+
 ~~~ json
 "status" : {
     "identifier_list": {
@@ -178,6 +178,7 @@ Option 1b:
 }
 ~~~
 
+> Option 1a allows for repeating IDs, Option 1b does not. Option 1b would be easier to work with for verifiers.
 
 ## Identifier List in CBOR Format {#identifier-list-cbor}
 
