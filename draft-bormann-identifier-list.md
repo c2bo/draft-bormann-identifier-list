@@ -83,7 +83,7 @@ Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JSON We
 
 This document defines a new status mechanism using the framework that is given by the Status List {{StatusList}}, thus registering a new mechanism in it's registry.
 
-This document defines an Identifier List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of the listed Referenced Tokens are conveyed via an array in the Idenitfier List. Each Referenced Token is allocated an unique identifier during issuance. The status of each Referenced Token is then linked to its unique identifier. Not all Referenced Tokens provided by the Issuer may be present in the Identifier List, the absense of a Referenced Token may therefore be interpreted by a default value. An Identifier List may either be provided by an endpoint or be signed and embedded into an Identifier List Token, whereas this document defines its representations in JWT and CWT.
+This document defines an Identifier List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of the listed Referenced Tokens are conveyed via an array in the Identifier List. Each Referenced Token is allocated an unique identifier during issuance. The status of each Referenced Token is then linked to its unique identifier. Not all Referenced Tokens provided by the Issuer may be present in the Identifier List, the absence of a Referenced Token may therefore be interpreted by a default value. An Identifier List may either be provided by an endpoint or be signed and embedded into an Identifier List Token, whereas this document defines its representations in JWT and CWT.
 
 
 ~~~ ascii-art
@@ -130,21 +130,21 @@ The decisions taken in this specification aim to achieve the following design go
 
 # Terminology
 
-The specification uses the terms "Isusuer", "Relying Party", "Referenced Token" defined by {{StatusList}}.
+The specification uses the terms "Issuer", "Relying Party", "Referenced Token" defined by {{StatusList}}.
 
-Idenitifier List:
+Identifier List:
 : An object in JSON or CBOR representation containing an array that lists the statuses of multiple Referenced Tokens.
 
-Idenitifier List Token:
-: A token in JWT or CWT representation that contains a cryptographically secured Idenitifier List.
+Identifier List Token:
+: A token in JWT or CWT representation that contains a cryptographically secured Identifier List.
 
 > TODO: change definition in StatusList to reuse Referenced Token
 
-# Idenitfier List {#identifier-list}
+# Identifier List {#identifier-list}
 
 ## Identifier List in JSON Format {#identifier-list-json}
 
-This section defines the structure for a JSON-encoded Idenitifier List:
+This section defines the structure for a JSON-encoded Identifier List:
 
 * `status`: REQUIRED, as defined in section xyz of {{StatusList}}
   * `identifier_list` : REQUIRED, an array containing objects with the following entries
@@ -153,7 +153,7 @@ This section defines the structure for a JSON-encoded Idenitifier List:
 
 The identifier list objects may contains other claims.
 
-The following example illustrates the JSON representation of the Idenitifier List:
+The following example illustrates the JSON representation of the Identifier List:
 Option 1a:
 ```json
 "status" : {
@@ -176,21 +176,21 @@ Option 1b:
 ```
 
 
-## Idenitifier List in CBOR Format {#identifier-list-cbor}
+## Identifier List in CBOR Format {#identifier-list-cbor}
 
 This section defines the structure for a CBOR-encoded Identifier List:
 
-The following example illustrates the CBOR representation of the Idenitifier List:
+The following example illustrates the CBOR representation of the Identifier List:
 
 The following is the CBOR diagnostic output of the example above:
 
-# Idenitifier List Token {#identifier-list-token}
+# Identifier List Token {#identifier-list-token}
 
-A Idenitifier List Token embeds the Idenitifier List into a token that is cryptographically signed and protects the integrity of the Idenitifier List. This allows for the Idenitifier List Token to be hosted by third parties or be transferred for offline use cases.
+A Identifier List Token embeds the Identifier List into a token that is cryptographically signed and protects the integrity of the Identifier List. This allows for the Identifier List Token to be hosted by third parties or be transferred for offline use cases.
 
-This section specifies Idenitifier List Tokens in JSON Web Token (JWT) and CBOR Web Token (CWT) format.
+This section specifies Identifier List Tokens in JSON Web Token (JWT) and CBOR Web Token (CWT) format.
 
-## Idenitifier List Token in JWT Format {#identifier-list-token-jwt}
+## Identifier List Token in JWT Format {#identifier-list-token-jwt}
 
 > Paul: I've worked until here
 
