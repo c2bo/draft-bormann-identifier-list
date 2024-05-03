@@ -23,17 +23,12 @@ author:
     email: paul.bastian@posteo.de
 
 normative:
-  RFC1950: RFC1950
-  RFC1951: RFC1951
   RFC2046: RFC2046
   RFC3986: RFC3986
   RFC6125: RFC6125
   RFC6838: RFC6838
-  RFC7515: RFC7515
   RFC7519: RFC7519
-  RFC8259: RFC8259
   RFC8392: RFC8392
-  RFC8949: RFC8949
   RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
@@ -500,93 +495,7 @@ This section requests registration of the following media types {{RFC2046}} in
 the "Media Types" registry {{IANA.MediaTypes}} in the manner described
 in {{RFC6838}}.
 
-To indicate that the content is an JSON-based Status List:
-
-  * Type name: application
-  * Subtype name: statuslist+json
-  * Required parameters: n/a
-  * Optional parameters: n/a
-  * Encoding considerations: binary; A JSON-based Status List is a JSON Object.
-  * Security considerations: See (#Security) of \[ this specification \]
-  * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
-  * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
-  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
-  * Intended usage: COMMON
-  * Restrictions on usage: none
-  * Author: Paul Bastian, paul.bastian@posteo.de
-  * Change controller: IETF
-  * Provisional registration? No
-
-To indicate that the content is an JWT-based Status List:
-
-  * Type name: application
-  * Subtype name: statuslist+jwt
-  * Required parameters: n/a
-  * Optional parameters: n/a
-  * Encoding considerations: binary; A JWT-based Status List is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.
-  * Security considerations: See (#Security) of \[ this specification \]
-  * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
-  * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
-  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
-  * Intended usage: COMMON
-  * Restrictions on usage: none
-  * Author: Paul Bastian, paul.bastian@posteo.de
-  * Change controller: IETF
-  * Provisional registration? No
-
-To indicate that the content is an CBOR-based Status List:
-
-  * Type name: application
-  * Subtype name: statuslist+cbor
-  * Required parameters: n/a
-  * Optional parameters: n/a
-  * Encoding considerations: binary; A CBOR-based Status List is a CBOR Object.
-  * Security considerations: See (#Security) of \[ this specification \]
-  * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
-  * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
-  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
-  * Intended usage: COMMON
-  * Restrictions on usage: none
-  * Author: Paul Bastian, paul.bastian@posteo.de
-  * Change controller: IETF
-  * Provisional registration? No
-
-To indicate that the content is an CWT-based Status List:
-
-  * Type name: application
-  * Subtype name: statuslist+cwt
-  * Required parameters: n/a
-  * Optional parameters: n/a
-  * Encoding considerations: binary;
-  * Security considerations: See (#Security) of \[ this specification \]
-  * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
-  * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
-  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
-  * Intended usage: COMMON
-  * Restrictions on usage: none
-  * Author: Paul Bastian, paul.bastian@posteo.de
-  * Change controller: IETF
-  * Provisional registration? No
+TODO
 
 --- back
 
