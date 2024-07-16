@@ -3,9 +3,9 @@
 
 
 Network Working Group                                         C. Bormann
-Internet-Draft                                                          
+Internet-Draft                                         Robert Bosch GmbH
 Intended status: Informational                                P. Bastian
-Expires: 4 November 2024                                      3 May 2024
+Expires: 17 January 2025                                    16 July 2024
 
 
                          OAuth identifier List
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 November 2024.
+   This Internet-Draft will expire on 17 January 2025.
 
 Copyright Notice
 
@@ -83,10 +83,9 @@ Table of Contents
      6.4.  Referenced Token in other COSE/CBOR Format
    7.  Status Types
    8.  Verification and Processing
-     8.1.  Status List Request
-     8.2.  Status List Response
-     8.3.  Caching
-     8.4.  Validation Rules
+     8.1.  Identifier List Request
+     8.2.  Identifier List Response
+     8.3.  Validation Rules
    9.  Privacy Considerations
      9.1.  Limiting issuers observability of token verification
      9.2.  Malicious Issuers
@@ -160,7 +159,7 @@ Table of Contents
 
       TODO: new Rationale: - very simple - optimized for very low
       revocation rates - no interaction between Issuance and revocation
-      service
+      service - allows for additional metadata
 
 1.2.  Design Considerations
 
@@ -212,42 +211,23 @@ Table of Contents
    This section defines the structure for a JSON-encoded Identifier
    List:
 
-   *  status: REQUIRED, as defined in section xyz of [StatusList]
+   *  identifier_list : REQUIRED, an object containing Identifiers
+      mapping to Object with the following entries
 
-      -  identifier_list : REQUIRED, an array containing objects with
-         the following entries
+      -  status: REQUIRED, values are the same as defined in the IANA
+         Status Registry (TODO)
 
-         o  id : REQUIRED, represents the identifier of the Referenced
-            Token.
-
-         o  status: REQUIRED, values are the same as IANA Status
-            Registry
-
-   The identifier list objects may contains other claims.
+   The identifier_list objects may contains other claims.
 
    The following example illustrates the JSON representation of the
    Identifier List:
 
-   Option 1a:
-
-   "status" : {
-       "identifier_list": [
-           { "id" : 256984364732378, "status" : 1},
-           { "id" : 719348638462628, "status" : 1}
-       ]
+   {
+     "identifier_list": {
+         "256984364732378": { "status" : 1},
+         "719348638462628": { "status" : 0}
+     }
    }
-
-   Option 1b:
-
-   "status" : {
-       "identifier_list": {
-           "256984364732378": { "status" : 1},
-           "719348638462628": { "status" : 1}
-       }
-   }
-
-      Option 1a allows for repeating IDs, Option 1b does not.  Option 1b
-      would be easier to work with for verifiers.
 
 4.2.  Identifier List in CBOR Format
 
@@ -314,8 +294,7 @@ Table of Contents
    The following is a non-normative example for a Identifier List Token
    in JWT format:
 
-   // ~~~~~~~~~~ // {::include ./examples/identifier_list_jwt} //
-   ~~~~~~~~~~
+      TODO
 
 5.2.  Identifier List Token in CWT Format
 
@@ -363,13 +342,11 @@ Table of Contents
    The following is a non-normative example for a Identifier List Token
    in CWT format (not including the type header yet):
 
-   // ~~~~~~~~~~ // {::include ./examples/identifier_list_cwt} //
-   ~~~~~~~~~~
+      TODO
 
    The following is the CBOR diagnostic output of the example above:
 
-   // ~~~~~~~~~~ // {::include ./examples/identifier_list_cwt_diag} //
-   ~~~~~~~~~~
+      TODO
 
 6.  Referenced Token
 
@@ -399,7 +376,7 @@ Table of Contents
          to a Identifier List or Status Identifier Token.  The object
          contains exactly two claims:
 
-         o  id: REQUIRED.  The id (identifier) claim MUST specify a
+         o  idx: REQUIRED.  The id (identifier) claim MUST specify a
             String that represents the identifier to check for status
             information in the Identifier List for the current
             Referenced Token.
@@ -426,7 +403,7 @@ Table of Contents
      "status": {
        "identifier_list": {
          "id": "256984364732378",
-         "uri": "https://example.com/statuslists/1"
+         "uri": "https://example.com/identifier_list/1"
        }
      }
    }
@@ -478,7 +455,7 @@ Table of Contents
            / status / 65535: {
              "status_list": {
                "idx": "0",
-               "uri": "https://example.com/statuslists/1"
+               "uri": "https://example.com/identifier_list/1"
              }
            }
          } >>,
@@ -505,7 +482,7 @@ Table of Contents
    The following is a non-normative example for a decoded payload of a
    Referenced Token:
 
-   TBD: example
+      TODO
 
 7.  Status Types
 
@@ -513,63 +490,11 @@ Table of Contents
 
 8.  Verification and Processing
 
-8.1.  Status List Request
+8.1.  Identifier List Request
 
-   To obtain the Status List or Status List Token, the Relying Party
-   MUST send a HTTP GET request to the Status List Endpoint.
-   Communication with the Status List Endpoint MUST utilize TLS.  Which
-   version(s) should be implemented will vary over time.  A TLS server
-   certificate check MUST be performed as defined in Section 5 and 6 of
-   [RFC6125].
+8.2.  Identifier List Response
 
-   The Relying Party SHOULD send the following Accept-Header to indicate
-   the requested response type:
-
-   *  "application/statuslist+json" for Status List in JSON format
-
-   *  "application/statuslist+jwt" for Status List in JWT format
-
-   *  "application/statuslist+cbor" for Status List in CBOR format
-
-   *  "application/statuslist+cwt" for Status List in CWT format
-
-   If the Relying Party does not send an Accept Header, the response
-   type is assumed to be known implicit or out-of-band.
-
-8.2.  Status List Response
-
-   In the successful response, the Status List Provider MUST use the
-   following content-type:
-
-   *  "application/statuslist+json" for Status List in JSON format
-
-   *  "application/statuslist+jwt" for Status List in JWT format
-
-   *  "application/statuslist+cbor" for Status List in CBOR format
-
-   *  "application/statuslist+cwt" for Status List in CWT format
-
-   In the case of "application/statuslist+json", the response MUST be of
-   type JSON and follow the rules of Section 4.1.  In the case of
-   "application/statuslist+jwt", the response MUST be of type JWT and
-   follow the rules of Section 5.1.  In the case of "application/
-   statuslist+cbor", the response MUST be of type CBOR and follow the
-   rules of Section 4.2.  In the case of "application/statuslist+cwt",
-   the response MUST be of type CWT and follow the rules of Section 5.2.
-
-   The HTTP response SHOULD use gzip Content-Encoding as defined in
-   [RFC9110].
-
-8.3.  Caching
-
-   If caching is required (e.g., to enable the use of alternative
-   mechanisms for hosting, like Content Delivery Networks), the control
-   of the caching mechanism SHOULD be implemented using the standard
-   HTTP Cache-Control as defined in [RFC9111].
-
-8.4.  Validation Rules
-
-   TBD
+8.3.  Validation Rules
 
 9.  Privacy Considerations
 
@@ -586,30 +511,6 @@ Table of Contents
    The same considerations as in [StatusList] applies.
 
 9.4.  Unlinkability
-
-   Colluding Issuers and a Relying Parties have the possibility to link
-   two transactions, as the tuple of uri and index inside the Referenced
-   Token are unique and therefore traceable data.  By comparing the
-   status claims of received Referenced Tokens, two colluding Relying
-   Parties could determine that they have interacted with the same user
-   or an Issuer could trace the usage of its issued Referenced Token by
-   colluding with various Relying Parties.  It is therefore recommended
-   to use Status Lists for Referenced Token formats that have similar
-   unlinkability properties.
-
-   To avoid privacy risks for colluding Relying Parties, it is
-   RECOMMENDED that Issuers use batch issuance to issue multiple tokens,
-   see Section 10.1.
-
-   To avoid further correlatable information by the values of uri and
-   index, Issuers are RECOMMENDED to:
-
-   *  choose non-sequential, pseudo-random or random indices
-
-   *  use decoy or dead entries to obfuscate the real number of
-      Referenced Tokens within a Status List
-
-   *  choose to deploy and utilize multiple Status Lists simultaneously
 
 9.5.  Third Party Hosting
 
@@ -823,9 +724,9 @@ Table of Contents
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-03, 4 March
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-03>.
+              oauth-sd-jwt-vc-04>.
 
    [StatusList]
               "*** BROKEN REFERENCE ***".
@@ -844,7 +745,8 @@ Document History
 Authors' Addresses
 
    Christian Bormann
-   Email: chris.bormann@gmx.de
+   Robert Bosch GmbH
+   Email: christiancarl.bormann@bosch.com
 
 
    Paul Bastian
