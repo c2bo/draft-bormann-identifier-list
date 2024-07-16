@@ -17,7 +17,8 @@ venue:
 author:
  -
     fullname: Christian Bormann
-    email: chris.bormann@gmx.de
+    organization: Robert Bosch GmbH
+    email: christiancarl.bormann@bosch.com
  -
     fullname: Paul Bastian
     email: paul.bastian@posteo.de
@@ -112,6 +113,7 @@ This document defines an Identifier List and its representations in JSON and CBO
 - very simple
 - optimized for very low revocation rates
 - no interaction between Issuance and revocation service
+- allows for additional metadata
 
 ## Design Considerations
 
@@ -146,39 +148,23 @@ Identifier List Token:
 
 This section defines the structure for a JSON-encoded Identifier List:
 
-* `status`: REQUIRED, as defined in section xyz of {{StatusList}}
-  * `identifier_list` : REQUIRED, an array containing objects with the following entries
-    * `id` : REQUIRED, represents the identifier of the Referenced Token.
-    * `status`: REQUIRED, values are the same as IANA Status Registry
+* `identifier_list` : REQUIRED, an object containing Identifiers mapping to Object with the following entries
+  * `status`: REQUIRED, values are the same as defined in the IANA Status Registry (TODO)
 
-The identifier list objects may contains other claims.
+The `identifier_list` objects may contains other claims.
 
 The following example illustrates the JSON representation of the Identifier List:
 
-Option 1a:
 
 ~~~ json
-"status" : {
-    "identifier_list": [
-        { "id" : 256984364732378, "status" : 1},
-        { "id" : 719348638462628, "status" : 1}
-    ]
+{
+  "identifier_list": {
+      "256984364732378": { "status" : 1},
+      "719348638462628": { "status" : 0}
+  }
 }
 ~~~
 
-
-Option 1b:
-
-~~~ json
-"status" : {
-    "identifier_list": {
-        "256984364732378": { "status" : 1},
-        "719348638462628": { "status" : 1}
-    }
-}
-~~~
-
-> Option 1a allows for repeating IDs, Option 1b does not. Option 1b would be easier to work with for verifiers.
 
 ## Identifier List in CBOR Format {#identifier-list-cbor}
 
@@ -225,9 +211,7 @@ The following additional rules apply:
 
 The following is a non-normative example for a Identifier List Token in JWT format:
 
-// ~~~~~~~~~~
-// {::include ./examples/identifier_list_jwt}
-// ~~~~~~~~~~
+> TODO
 
 ## Identifier List Token in CWT Format {#identifier-list-token-cwt}
 
@@ -257,15 +241,11 @@ The following additional rules apply:
 
 The following is a non-normative example for a Identifier List Token in CWT format (not including the type header yet):
 
-// ~~~~~~~~~~
-// {::include ./examples/identifier_list_cwt}
-// ~~~~~~~~~~
+> TODO
 
 The following is the CBOR diagnostic output of the example above:
 
-// ~~~~~~~~~~
-// {::include ./examples/identifier_list_cwt_diag}
-// ~~~~~~~~~~
+> TODO
 
 # Referenced Token {#referenced-token}
 
@@ -282,7 +262,7 @@ The following content applies to the JWT Claims Set:
 * `iss`: REQUIRED, as defined in section xyz of {{StatusList}}
 * `status`: REQUIRED, as defined in section xyz of {{StatusList}}
   * `identifier_list`: REQUIRED when the identifier list mechanism defined in this specification is used. It contains a reference to a Identifier List or Status Identifier Token. The object contains exactly two claims:
-    * `id`: REQUIRED. The `id` (identifier) claim MUST specify a String that represents the identifier to check for status information in the Identifier List for the current Referenced Token.
+    * `idx`: REQUIRED. The `id` (identifier) claim MUST specify a String that represents the identifier to check for status information in the Identifier List for the current Referenced Token.
     * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Identifier List or Identifier List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
 Application of additional restrictions and policy are at the discretion of the verifying party.
@@ -301,7 +281,7 @@ The following is a non-normative example for a decoded header and payload of a R
   "status": {
     "identifier_list": {
       "id": "256984364732378",
-      "uri": "https://example.com/statuslists/1"
+      "uri": "https://example.com/identifier_list/1"
     }
   }
 }
@@ -338,7 +318,7 @@ The following is a non-normative example for a decoded payload of a Referenced T
         / status / 65535: {
           "status_list": {
             "idx": "0",
-            "uri": "https://example.com/statuslists/1"
+            "uri": "https://example.com/identifier_list/1"
           }
         }
       } >>,
@@ -359,7 +339,7 @@ Application of additional restrictions and policy are at the discretion of the v
 
 The following is a non-normative example for a decoded payload of a Referenced Token:
 
-TBD: example
+> TODO
 
 # Status Types {#status-types}
 
@@ -367,43 +347,11 @@ Reusing the same Status registered in IANA by Status List
 
 # Verification and Processing
 
-## Status List Request
+## Identifier List Request
 
-To obtain the Status List or Status List Token, the Relying Party MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
-
-The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:
-
-- "application/statuslist+json" for Status List in JSON format
-- "application/statuslist+jwt" for Status List in JWT format
-- "application/statuslist+cbor" for Status List in CBOR format
-- "application/statuslist+cwt" for Status List in CWT format
-
-If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
-
-## Status List Response
-
-In the successful response, the Status List Provider MUST use the following content-type:
-
-- "application/statuslist+json" for Status List in JSON format
-- "application/statuslist+jwt" for Status List in JWT format
-- "application/statuslist+cbor" for Status List in CBOR format
-- "application/statuslist+cwt" for Status List in CWT format
-
-In the case of "application/statuslist+json", the response MUST be of type JSON and follow the rules of [](#identifier-list-json).
-In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#identifier-list-token-jwt).
-In the case of "application/statuslist+cbor", the response MUST be of type CBOR and follow the rules of [](#identifier-list-cbor).
-In the case of "application/statuslist+cwt", the response MUST be of type CWT and follow the rules of [](#identifier-list-token-cwt).
-
-The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
-
-## Caching
-
-If caching is required (e.g., to enable the use of alternative mechanisms for hosting, like Content Delivery Networks), the control of the caching mechanism SHOULD be implemented using the standard HTTP Cache-Control as defined in {{RFC9111}}.
+## Identifier List Response
 
 ## Validation Rules
-
-TBD
-
 
 # Privacy Considerations
 
@@ -420,16 +368,6 @@ The same considerations as in {{StatusList}} applies.
 The same considerations as in {{StatusList}} applies.
 
 ## Unlinkability
-
-Colluding Issuers and a Relying Parties have the possibility to link two transactions, as the tuple of `uri` and `index` inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
-
-To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple tokens, see [](#implementation-lifecycle).
-
-To avoid further correlatable information by the values of `uri` and `index`, Issuers are RECOMMENDED to:
-
-- choose non-sequential, pseudo-random or random indices
-- use decoy or dead entries to obfuscate the real number of Referenced Tokens within a Status List
-- choose to deploy and utilize multiple Status Lists simultaneously
 
 ## Third Party Hosting
 
